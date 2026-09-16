@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="stroke" x1="8" y1="8" x2="56" y2="56">
+      <stop stop-color="#ff4ec8"/>
+      <stop offset="1" stop-color="#9b5cff"/>
+    </linearGradient>
+  </defs>
+  
+    <path d="M24 20L14 32l10 12M40 20l10 12-10 12M36 18L28 46" stroke="url(#stroke)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+</svg>

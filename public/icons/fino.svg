@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="stroke" x1="8" y1="8" x2="56" y2="56">
+      <stop stop-color="#ff4ec8"/>
+      <stop offset="1" stop-color="#9b5cff"/>
+    </linearGradient>
+  </defs>
+  
+    <path d="M32 12l16 8v12c0 10.5-7.2 18-16 20C23.2 50 16 42.5 16 32V20l16-8z" stroke="url(#stroke)" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M32 26v14M27 33h10" stroke="url(#stroke)" stroke-width="1.8" stroke-linecap="round"/>
+  
+</svg>

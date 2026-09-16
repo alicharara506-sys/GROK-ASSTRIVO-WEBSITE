@@ -1,17 +1,16 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { useSyncExternalStore } from "react";
+import ConstellationCanvas from "@/components/constellation/ConstellationCanvas";
 
-const ConstellationCanvas = dynamic(
-  () => import("@/components/constellation/ConstellationCanvas"),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="fixed inset-0 z-0 bg-space" aria-hidden="true" />
-    ),
-  },
-);
+const subscribe = () => () => {};
 
 export function ConstellationLoader() {
+  const mounted = useSyncExternalStore(subscribe, () => true, () => false);
+
+  if (!mounted) {
+    return <div className="fixed inset-0 z-0 bg-space" aria-hidden="true" />;
+  }
+
   return <ConstellationCanvas />;
 }

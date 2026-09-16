@@ -69,7 +69,7 @@ export function FleetMap() {
             </defs>
           </svg>
 
-          <div className="absolute left-1/2 top-1/2 z-10 w-[min(38%,10.5rem)] -translate-x-1/2 -translate-y-1/2">
+          <div className="absolute left-1/2 top-1/2 z-10 w-[min(44%,12.5rem)] -translate-x-1/2 -translate-y-1/2">
             <AgentCard
               agent={CORE_AGENT}
               featured
@@ -137,10 +137,10 @@ function AgentCard({
           <AgentIcon src={agent.icon} alt="" size={featured ? 22 : 18} />
         </span>
         <span className="min-w-0">
-          <h3 className="font-display truncate text-[0.7rem] font-semibold tracking-[0.14em] text-white sm:text-xs">
+          <h3 className="font-display text-[0.7rem] font-semibold tracking-[0.14em] text-white sm:text-xs">
             {agent.name}
           </h3>
-          <p className="mt-0.5 line-clamp-2 text-[0.62rem] leading-snug text-muted sm:text-[0.7rem]">
+          <p className={`mt-0.5 text-[0.62rem] leading-snug text-muted sm:text-[0.7rem] ${featured ? "line-clamp-3" : "line-clamp-2"}`}>
             {agent.role}
           </p>
         </span>

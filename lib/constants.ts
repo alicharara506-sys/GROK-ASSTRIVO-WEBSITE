@@ -11,7 +11,7 @@ export const COLORS = {
 } as const;
 
 /** Canvas fades toward this opacity as the hero scrolls out of view. */
-export const CONSTELLATION_AMBIENT_OPACITY = 0.2;
+export const CONSTELLATION_AMBIENT_OPACITY = 0.14;
 
 /** Hero scroll distance (in viewport heights) that completes camera pull-back. */
 export const HERO_SCROLL_VIEWPORTS = 1;

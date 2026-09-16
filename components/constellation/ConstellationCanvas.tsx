@@ -3,20 +3,22 @@
 import { useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ConstellationScene } from "@/components/constellation/ConstellationScene";
+import { useAgentUi } from "@/components/ui/AgentUiProvider";
 import { CONSTELLATION_AMBIENT_OPACITY, COLORS } from "@/lib/constants";
 import { constellationScroll } from "@/lib/scroll-state";
 
 export default function ConstellationCanvas() {
   const wrap = useRef<HTMLDivElement>(null);
+  const { hover } = useAgentUi();
 
   useEffect(() => {
     const el = wrap.current;
     const onScroll = () => {
       const t = Math.min(1, Math.max(0, window.scrollY / window.innerHeight));
       constellationScroll.progress = t;
+      if (t > 0.35) hover(null);
       if (!el) return;
-      const opacity =
-        1 - t * (1 - CONSTELLATION_AMBIENT_OPACITY);
+      const opacity = 1 - t * (1 - CONSTELLATION_AMBIENT_OPACITY);
       el.style.opacity = String(opacity);
       el.style.pointerEvents = t < 0.72 ? "auto" : "none";
     };
@@ -27,7 +29,7 @@ export default function ConstellationCanvas() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [hover]);
 
   return (
     <div

@@ -5,6 +5,7 @@ import { Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import type { Agent } from "@/lib/agents";
+import { constellationScroll } from "@/lib/scroll-state";
 import { useAgentUi } from "@/components/ui/AgentUiProvider";
 
 type AgentNodeProps = {
@@ -95,13 +96,13 @@ export function AgentNode({ agent, index }: AgentNodeProps) {
         />
       </mesh>
       {isCore ? <CoreRings /> : null}
-      {hoveredId === agent.id ? (
+      {hoveredId === agent.id && constellationScroll.progress < 0.35 ? (
         <Html
           center
           sprite
           distanceFactor={7.5}
           style={{ pointerEvents: "none" }}
-          zIndexRange={[30, 0]}
+          zIndexRange={[5, 0]}
         >
           <div className="flex items-center gap-2 rounded-full border border-magenta/40 bg-[#05010a]/80 px-3 py-1.5 shadow-[0_0_24px_rgba(255,43,214,0.35)] backdrop-blur-md">
             {/* eslint-disable-next-line @next/next/no-img-element */}

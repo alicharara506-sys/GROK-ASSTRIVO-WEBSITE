@@ -1,6 +1,6 @@
 const NAV = [
-  { href: "#fleet", label: "Meet the Fleet" },
-  { href: "#about", label: "About" },
+  { href: "#fleet", label: "Meet the Fleet", short: "Fleet" },
+  { href: "#about", label: "About", short: "About" },
 ];
 
 export function SiteHeader() {
@@ -20,7 +20,8 @@ export function SiteHeader() {
               href={item.href}
               className="transition hover:text-glow"
             >
-              {item.label}
+              <span className="sm:hidden">{item.short}</span>
+              <span className="hidden sm:inline">{item.label}</span>
             </a>
           ))}
         </nav>

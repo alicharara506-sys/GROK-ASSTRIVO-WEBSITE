@@ -18,7 +18,7 @@ export function AboutSection() {
   const astro = getAgent("astro");
 
   return (
-    <section id="about" className="relative z-10 px-5 py-24 sm:px-8 sm:py-32">
+    <section id="about" className="relative z-10 scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32">
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
         <div>
           <p className="text-[0.7rem] uppercase tracking-[0.42em] text-glow/90">

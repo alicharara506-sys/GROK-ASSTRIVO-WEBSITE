@@ -17,7 +17,7 @@ export function FleetMap() {
   const { select, hover, hoveredId, selectedId } = useAgentUi();
 
   return (
-    <section id="fleet" className="relative z-10 px-5 py-24 sm:px-8 sm:py-32">
+    <section id="fleet" className="relative z-10 scroll-mt-24 px-5 pb-24 pt-32 sm:px-8 sm:pb-32 sm:pt-36">
       <div className="mx-auto max-w-6xl">
         <p className="text-[0.7rem] uppercase tracking-[0.42em] text-glow/90">
           The fleet
@@ -84,7 +84,7 @@ export function FleetMap() {
             return (
               <div
                 key={agent.id}
-                className="absolute z-10 w-[min(28%,8.75rem)] -translate-x-1/2 -translate-y-1/2"
+                className="absolute z-10 w-[min(31%,10.25rem)] -translate-x-1/2 -translate-y-1/2"
                 style={{ left, top }}
               >
                 <AgentCard
@@ -140,7 +140,7 @@ function AgentCard({
           <h3 className="font-display truncate text-[0.7rem] font-semibold tracking-[0.14em] text-white sm:text-xs">
             {agent.name}
           </h3>
-          <p className="mt-0.5 truncate text-[0.62rem] leading-snug text-muted sm:text-[0.7rem]">
+          <p className="mt-0.5 line-clamp-2 text-[0.62rem] leading-snug text-muted sm:text-[0.7rem]">
             {agent.role}
           </p>
         </span>

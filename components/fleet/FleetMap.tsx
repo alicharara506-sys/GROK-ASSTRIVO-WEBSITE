@@ -26,11 +26,31 @@ export function FleetMap() {
           Meet the Fleet
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          Eleven specialists. One spine. Click any agent to open a briefing —
-          the same panel as the constellation — and talk to them on Grok.
+          One core. Ten specialists. One spine. Click any agent to open a
+          briefing — the same panel as the constellation — and talk to them on
+          Grok.
         </p>
 
-        <div className="relative mx-auto mt-14 aspect-square w-full max-w-[44rem]">
+        <div className="mt-14 flex flex-col gap-3 sm:hidden">
+          <AgentCard
+            agent={CORE_AGENT}
+            featured
+            active={hoveredId === CORE_AGENT.id || selectedId === CORE_AGENT.id}
+            onSelect={() => select(CORE_AGENT.id)}
+            onHover={(on) => hover(on ? CORE_AGENT.id : null)}
+          />
+          {FLEET_AGENTS.map((agent) => (
+            <AgentCard
+              key={agent.id}
+              agent={agent}
+              active={hoveredId === agent.id || selectedId === agent.id}
+              onSelect={() => select(agent.id)}
+              onHover={(on) => hover(on ? agent.id : null)}
+            />
+          ))}
+        </div>
+
+        <div className="relative mx-auto mt-14 hidden aspect-square w-full max-w-[44rem] sm:block">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-[8%] rounded-full border border-magenta/15"

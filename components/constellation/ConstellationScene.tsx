@@ -64,7 +64,12 @@ export function ConstellationScene() {
       <group ref={group}>
         <Connections hoveredId={hoveredId} selectedId={selectedId} />
         {AGENTS.map((agent, index) => (
-          <AgentNode key={agent.id} agent={agent} index={index} />
+          <AgentNode
+            key={agent.id}
+            agent={agent}
+            index={index}
+            reducedMotion={reducedMotion}
+          />
         ))}
       </group>
       <OrbitControls

@@ -11,9 +11,14 @@ import { useAgentUi } from "@/components/ui/AgentUiProvider";
 type AgentNodeProps = {
   agent: Agent;
   index: number;
+  reducedMotion?: boolean;
 };
 
-export function AgentNode({ agent, index }: AgentNodeProps) {
+export function AgentNode({
+  agent,
+  index,
+  reducedMotion = false,
+}: AgentNodeProps) {
   const group = useRef<THREE.Group>(null);
   const glow = useRef<THREE.Mesh>(null);
   const { hoveredId, selectedId, hover, select } = useAgentUi();
@@ -28,7 +33,8 @@ export function AgentNode({ agent, index }: AgentNodeProps) {
     const node = group.current;
     if (!node) return;
     const t = clock.elapsedTime;
-    const bob = isCore ? 0 : Math.sin(t * 0.7 + phase) * 0.07;
+    const bob =
+      reducedMotion || isCore ? 0 : Math.sin(t * 0.7 + phase) * 0.07;
     node.position.set(base[0], base[1] + bob, base[2]);
     const target = active ? 1.28 : 1;
     const s = THREE.MathUtils.damp(node.scale.x, target, 8, dt);

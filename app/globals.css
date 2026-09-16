@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+:root {
+  --space: #05010a;
+  --space-2: #0b0616;
+  --magenta: #ff2bd6;
+  --violet: #a855f7;
+  --glow: #e879f9;
+  --text: #f6ecff;
+  --muted: #cbb6dd;
+}
+
+@theme inline {
+  --color-space: var(--space);
+  --color-space-2: var(--space-2);
+  --color-magenta: var(--magenta);
+  --color-violet: var(--violet);
+  --color-glow: var(--glow);
+  --color-foreground: var(--text);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-syne);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  background: var(--space);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background:
+    radial-gradient(1200px 700px at 50% -10%, rgba(168, 85, 247, 0.16), transparent 55%),
+    radial-gradient(900px 500px at 80% 40%, rgba(255, 43, 214, 0.08), transparent 50%),
+    var(--space);
+  color: var(--text);
+}
+
+.panel-glass {
+  background: rgba(8, 4, 18, 0.72);
+  border: 1px solid rgba(255, 43, 214, 0.22);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.12);
+}
+
+::selection {
+  background: rgba(255, 43, 214, 0.35);
+  color: white;
+}

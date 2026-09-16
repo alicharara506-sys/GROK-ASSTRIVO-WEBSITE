@@ -6,6 +6,12 @@ const NAV = [
 export function SiteHeader() {
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-40">
+      <a
+        href="#fleet"
+        className="pointer-events-auto sr-only focus:not-sr-only focus:absolute focus:left-5 focus:top-3 focus:z-50 focus:rounded-full focus:bg-magenta focus:px-4 focus:py-2 focus:text-xs focus:font-semibold focus:tracking-[0.18em] focus:text-white focus:uppercase"
+      >
+        Skip to Meet the Fleet
+      </a>
       <div className="pointer-events-auto mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
         <a
           href="#hero"

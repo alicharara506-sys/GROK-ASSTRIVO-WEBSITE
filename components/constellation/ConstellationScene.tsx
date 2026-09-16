@@ -68,11 +68,12 @@ export function ConstellationScene() {
         ))}
       </group>
       <OrbitControls
+        enabled={!selectedId}
         enablePan={false}
         enableZoom={false}
         enableDamping
         dampingFactor={0.08}
-        autoRotate={!reducedMotion}
+        autoRotate={!reducedMotion && !selectedId}
         autoRotateSpeed={0.38}
         rotateSpeed={0.55}
         minPolarAngle={Math.PI * 0.2}

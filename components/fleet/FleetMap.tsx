@@ -117,34 +117,41 @@ function AgentCard({
   onHover: (on: boolean) => void;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onSelect}
-      onMouseEnter={() => onHover(true)}
-      onMouseLeave={() => onHover(false)}
-      onFocus={() => onHover(true)}
-      onBlur={() => onHover(false)}
-      className={`panel-glass w-full rounded-2xl px-2.5 py-3 text-left transition duration-200 sm:px-3 sm:py-3.5 ${
-        featured ? "shadow-[0_0_40px_rgba(255,43,214,0.28)]" : ""
-      } ${active ? "border-magenta/70 ring-1 ring-magenta/40" : ""}`}
-    >
-      <span className="flex items-center gap-2">
-        <span
-          className={`flex shrink-0 items-center justify-center rounded-xl border border-magenta/25 bg-white/5 ${
-            featured ? "h-10 w-10" : "h-8 w-8"
-          }`}
-        >
-          <AgentIcon src={agent.icon} alt="" size={featured ? 22 : 18} />
+    <h3 className="m-0 font-normal">
+      <button
+        type="button"
+        aria-label={`Open ${agent.name} briefing, ${agent.role}`}
+        onClick={onSelect}
+        onMouseEnter={() => onHover(true)}
+        onMouseLeave={() => onHover(false)}
+        onFocus={() => onHover(true)}
+        onBlur={() => onHover(false)}
+        className={`panel-glass w-full rounded-2xl px-2.5 py-3 text-left transition duration-200 sm:px-3 sm:py-3.5 ${
+          featured ? "shadow-[0_0_40px_rgba(255,43,214,0.28)]" : ""
+        } ${active ? "border-magenta/70 ring-1 ring-magenta/40" : ""}`}
+      >
+        <span className="flex items-center gap-2">
+          <span
+            className={`flex shrink-0 items-center justify-center rounded-xl border border-magenta/25 bg-white/5 ${
+              featured ? "h-10 w-10" : "h-8 w-8"
+            }`}
+          >
+            <AgentIcon src={agent.icon} alt="" size={featured ? 22 : 18} />
+          </span>
+          <span className="min-w-0">
+            <span className="font-display block text-[0.7rem] font-semibold tracking-[0.14em] text-white sm:text-xs">
+              {agent.name}
+            </span>
+            <span
+              className={`mt-0.5 block text-[0.62rem] leading-snug text-muted sm:text-[0.7rem] ${
+                featured ? "line-clamp-3" : "line-clamp-2"
+              }`}
+            >
+              {agent.role}
+            </span>
+          </span>
         </span>
-        <span className="min-w-0">
-          <h3 className="font-display text-[0.7rem] font-semibold tracking-[0.14em] text-white sm:text-xs">
-            {agent.name}
-          </h3>
-          <p className={`mt-0.5 text-[0.62rem] leading-snug text-muted sm:text-[0.7rem] ${featured ? "line-clamp-3" : "line-clamp-2"}`}>
-            {agent.role}
-          </p>
-        </span>
-      </span>
-    </button>
+      </button>
+    </h3>
   );
 }

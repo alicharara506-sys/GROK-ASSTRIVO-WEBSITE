@@ -1,15 +1,25 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ConstellationScene } from "@/components/constellation/ConstellationScene";
-import { useAgentUi } from "@/components/ui/AgentUiProvider";
-import { CONSTELLATION_AMBIENT_OPACITY, COLORS } from "@/lib/constants";
+import { useFleetUi } from "@/components/ui/FleetUiProvider";
+import { COLORS, CONSTELLATION_AMBIENT_OPACITY } from "@/lib/constants";
 import { constellationScroll } from "@/lib/scroll-state";
+
+function detectLite() {
+  if (typeof window === "undefined") return false;
+  return (
+    window.matchMedia("(pointer: coarse)").matches ||
+    window.innerWidth < 768 ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
 
 export default function ConstellationCanvas() {
   const wrap = useRef<HTMLDivElement>(null);
-  const { hover } = useAgentUi();
+  const { hover } = useFleetUi();
+  const [lite] = useState(detectLite);
 
   useEffect(() => {
     const el = wrap.current;
@@ -39,16 +49,16 @@ export default function ConstellationCanvas() {
     >
       <Canvas
         camera={{ position: [0, 0.35, 8.4], fov: 42, near: 0.1, far: 80 }}
-        dpr={[1, 1.75]}
-        gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
+        dpr={lite ? [1, 1.25] : [1, 1.75]}
+        gl={{ antialias: !lite, alpha: false, powerPreference: "high-performance" }}
         onCreated={({ gl }) => {
-          gl.setClearColor(COLORS.space, 1);
+          gl.setClearColor(COLORS.void, 1);
         }}
         onPointerMissed={() => {
           document.body.style.cursor = "grab";
         }}
       >
-        <ConstellationScene />
+        <ConstellationScene lite={lite} />
       </Canvas>
     </div>
   );

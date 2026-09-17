@@ -9,7 +9,7 @@ export function ConstellationLoader() {
   const mounted = useSyncExternalStore(subscribe, () => true, () => false);
 
   if (!mounted) {
-    return <div className="fixed inset-0 z-0 bg-space" aria-hidden="true" />;
+    return <div className="fixed inset-0 z-0 bg-void" aria-hidden="true" />;
   }
 
   return <ConstellationCanvas />;

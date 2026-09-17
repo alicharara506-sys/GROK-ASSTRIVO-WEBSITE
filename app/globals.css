@@ -1,55 +1,106 @@
 @import "tailwindcss";
 
 :root {
-  --space: #05010a;
-  --space-2: #0b0616;
+  --void: #0b0b12;
+  --fog: #e8e6f0;
   --magenta: #ff2bd6;
-  --violet: #a855f7;
-  --glow: #e879f9;
-  --text: #f6ecff;
-  --muted: #cbb6dd;
+  --violet: #7b5cff;
+  --muted: #b7b4c7;
+  --glass: rgba(11, 11, 18, 0.72);
 }
 
 @theme inline {
-  --color-space: var(--space);
-  --color-space-2: var(--space-2);
+  --color-void: var(--void);
+  --color-fog: var(--fog);
   --color-magenta: var(--magenta);
   --color-violet: var(--violet);
-  --color-glow: var(--glow);
-  --color-foreground: var(--text);
   --color-muted: var(--muted);
-  --font-sans: var(--font-geist-sans);
-  --font-display: var(--font-syne);
+  --color-foreground: var(--fog);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space);
+  --font-editorial: var(--font-fraunces);
+  --font-mono: var(--font-jetbrains);
+  --font-soft: var(--font-outfit);
+  --font-plex: var(--font-ibm-plex);
+  --font-jakarta: var(--font-plus-jakarta);
+  --font-dm: var(--font-dm-sans);
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
-  background: var(--space);
+  background: var(--void);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
   background:
-    radial-gradient(1200px 700px at 50% -10%, rgba(168, 85, 247, 0.16), transparent 55%),
-    radial-gradient(900px 500px at 80% 40%, rgba(255, 43, 214, 0.08), transparent 50%),
-    var(--space);
-  color: var(--text);
+    radial-gradient(1100px 640px at 50% -12%, rgba(123, 92, 255, 0.2), transparent 55%),
+    radial-gradient(900px 520px at 88% 32%, rgba(255, 43, 214, 0.1), transparent 50%),
+    var(--void);
+  color: var(--fog);
 }
 
 .panel-glass {
-  background: rgba(8, 4, 18, 0.72);
-  border: 1px solid rgba(255, 43, 214, 0.22);
+  background: var(--glass);
+  border: 1px solid rgba(255, 43, 214, 0.2);
   backdrop-filter: blur(18px);
-  box-shadow: 0 0 40px rgba(168, 85, 247, 0.12);
+  box-shadow: 0 0 40px rgba(123, 92, 255, 0.12);
 }
 
 ::selection {
   background: rgba(255, 43, 214, 0.35);
   color: white;
+}
+
+.creed-watermark {
+  pointer-events: none;
+  user-select: none;
+}
+
+.bot-page {
+  --bot-primary: var(--void);
+  --bot-secondary: var(--violet);
+  --bot-accent: var(--magenta);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fallback-orbit {
+  animation: orbit-spin 48s linear infinite;
+}
+
+.fallback-orbit-slow {
+  animation: orbit-spin 72s linear infinite reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fallback-orbit,
+  .fallback-orbit-slow {
+    animation: none;
+  }
 }

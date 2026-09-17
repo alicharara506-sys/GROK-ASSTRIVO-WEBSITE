@@ -28,7 +28,7 @@ export function FleetNode({
   const router = useRouter();
   const isCore = member.slug === "astro";
   const active = hoveredId === member.slug;
-  const radius = isCore ? 0.44 : 0.19;
+  const radius = isCore ? 0.5 : 0.22;
   const base = member.position;
   const phase = index * 0.73;
   const drag = useRef({ x: 0, y: 0 });
@@ -95,28 +95,13 @@ export function FleetNode({
       </mesh>
       <mesh renderOrder={1}>
         <sphereGeometry args={[radius, detail, detail]} />
-        {lite ? (
-          <meshStandardMaterial
-            color={isCore ? "#1A1033" : "#12101c"}
-            roughness={0.28}
-            metalness={0.22}
-            emissive={color}
-            emissiveIntensity={active ? 1.05 : isCore ? 0.55 : 0.32}
-          />
-        ) : (
-          <meshPhysicalMaterial
-            color={isCore ? "#1A1033" : "#14061c"}
-            roughness={0.12}
-            metalness={0.18}
-            transmission={0.62}
-            thickness={0.55}
-            ior={1.42}
-            transparent
-            opacity={0.92}
-            emissive={color}
-            emissiveIntensity={active ? 1.2 : isCore ? 0.58 : 0.34}
-          />
-        )}
+        <meshStandardMaterial
+          color={isCore ? "#2a1848" : "#1a1228"}
+          roughness={0.22}
+          metalness={0.28}
+          emissive={color}
+          emissiveIntensity={active ? 1.35 : isCore ? 0.85 : 0.55}
+        />
       </mesh>
       {isCore ? <CoreRings reducedMotion={reducedMotion} /> : null}
       {active && constellationScroll.progress < 0.35 ? (

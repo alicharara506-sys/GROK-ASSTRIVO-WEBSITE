@@ -35,7 +35,7 @@ export function ConstellationScene({ lite = false }: { lite?: boolean }) {
   return (
     <>
       <color attach="background" args={[COLORS.void]} />
-      <fog attach="fog" args={[COLORS.void, 10, 36]} />
+      <fog attach="fog" args={[COLORS.void, 14, 48]} />
       <ambientLight intensity={0.3} color="#c4b5fd" />
       <pointLight
         position={[0, 0, 0]}

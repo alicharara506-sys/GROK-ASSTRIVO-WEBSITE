@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties, ReactNode } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -9,6 +10,7 @@ import { FLEET, type FleetMember } from "@/lib/fleet";
 import { botDisplayClass } from "@/lib/bot-style";
 import { AgentIcon } from "@/components/ui/AgentIcon";
 import { BotMotif2D } from "@/components/bot/BotMotif2D";
+import { hasWebGL } from "@/lib/webgl";
 
 const BotCanvas = dynamic(() => import("@/components/bot/BotCanvas"), {
   ssr: false,
@@ -23,6 +25,7 @@ const NAV = [
 
 export function BotPage({ member }: { member: FleetMember }) {
   const display = botDisplayClass(member.slug);
+  const [webgl] = useState(hasWebGL);
   const adjacent = member.adjacent
     .map((slug) => FLEET.find((item) => item.slug === slug))
     .filter((item): item is FleetMember => Boolean(item));
@@ -96,13 +99,19 @@ export function BotPage({ member }: { member: FleetMember }) {
           </div>
           <div className="relative">
             <div
-              className="aspect-square overflow-hidden rounded-[2rem] border"
+              className="relative aspect-square overflow-hidden rounded-[2rem] border"
               style={{ borderColor: `${member.theme.secondary}44` }}
             >
-              <BotCanvas member={member} />
-            </div>
-            <div className="pointer-events-none absolute -bottom-4 -left-2 h-24 w-40 opacity-70 sm:h-28 sm:w-52">
-              <BotMotif2D member={member} />
+              <div className="absolute inset-0 flex items-center justify-center p-10">
+                <div className="h-full w-full max-h-64">
+                  <BotMotif2D member={member} />
+                </div>
+              </div>
+              {webgl ? (
+                <div className="absolute inset-0">
+                  <BotCanvas member={member} />
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -112,10 +121,10 @@ export function BotPage({ member }: { member: FleetMember }) {
         <motion.section
           id="overview"
           className="scroll-mt-24"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.45 }}
+          initial={{ y: 12 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.4 }}
         >
           <Kicker color={member.theme.accent}>Overview</Kicker>
           <h2 className={`${display} mt-2 text-3xl text-white`}>What they own</h2>
@@ -131,10 +140,10 @@ export function BotPage({ member }: { member: FleetMember }) {
         <motion.section
           id="services"
           className="scroll-mt-24"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.45 }}
+          initial={{ y: 12 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.4 }}
         >
           <Kicker color={member.theme.accent}>Services</Kicker>
           <h2 className={`${display} mt-2 text-3xl text-white`}>How the work lands</h2>
@@ -154,10 +163,10 @@ export function BotPage({ member }: { member: FleetMember }) {
         <motion.section
           id="work"
           className="scroll-mt-24"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.45 }}
+          initial={{ y: 12 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.4 }}
         >
           <Kicker color={member.theme.accent}>Work</Kicker>
           <h2 className={`${display} mt-2 text-3xl text-white`}>Example scenarios</h2>

@@ -19,7 +19,7 @@ export function ParticleField({
   radius?: number;
 }) {
   const points = useRef<THREE.Points>(null);
-  const { positions, speeds } = useMemo(() => {
+  const geometry = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const speeds = new Float32Array(count);
     for (let i = 0; i < count; i += 1) {
@@ -32,7 +32,10 @@ export function ParticleField({
       positions[i3 + 2] = r * Math.cos(phi);
       speeds[i] = 0.15 + frac(i, 4) * 0.35;
     }
-    return { positions, speeds };
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute("speed", new THREE.BufferAttribute(speeds, 1));
+    return geo;
   }, [count, radius]);
 
   useFrame((_, dt) => {
@@ -40,24 +43,23 @@ export function ParticleField({
     if (!node) return;
     node.rotation.y += dt * 0.018;
     const attr = node.geometry.getAttribute("position") as THREE.BufferAttribute;
+    const speed = node.geometry.getAttribute("speed") as THREE.BufferAttribute;
     const array = attr.array as Float32Array;
     for (let i = 0; i < count; i += 1) {
       const i3 = i * 3;
-      array[i3 + 1] += Math.sin((array[i3] + array[i3 + 2]) * 0.2) * dt * 0.04 * speeds[i];
+      array[i3 + 1] +=
+        Math.sin((array[i3] + array[i3 + 2]) * 0.2) * dt * 0.04 * speed.getX(i);
     }
     attr.needsUpdate = true;
   });
 
   return (
-    <points ref={points} frustumCulled={false}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-      </bufferGeometry>
+    <points ref={points} geometry={geometry} frustumCulled={false}>
       <pointsMaterial
-        size={0.035}
+        size={0.045}
         color={color}
         transparent
-        opacity={0.55}
+        opacity={0.7}
         sizeAttenuation
         depthWrite={false}
         blending={THREE.AdditiveBlending}

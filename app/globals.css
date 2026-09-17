@@ -80,3 +80,27 @@ body {
 .tabular {
   font-variant-numeric: tabular-nums;
 }
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fallback-orbit {
+  animation: orbit-spin 48s linear infinite;
+}
+
+.fallback-orbit-slow {
+  animation: orbit-spin 72s linear infinite reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fallback-orbit,
+  .fallback-orbit-slow {
+    animation: none;
+  }
+}

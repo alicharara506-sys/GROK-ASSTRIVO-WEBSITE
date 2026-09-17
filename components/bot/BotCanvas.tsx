@@ -20,9 +20,8 @@ export default function BotCanvas({ member }: { member: FleetMember }) {
     <Canvas
       camera={{ position: [0, 0.2, 4.2], fov: 42 }}
       dpr={lite ? [1, 1.25] : [1, 1.6]}
-      gl={{ antialias: !lite, alpha: true, powerPreference: "high-performance" }}
+      gl={{ antialias: !lite, alpha: true, powerPreference: "high-performance", failIfMajorPerformanceCaveat: false }}
     >
-      <color attach="background" args={[member.theme.primary]} />
       <ambientLight intensity={0.45} />
       <pointLight position={[2.4, 2, 3]} intensity={1.4} color={member.theme.secondary} />
       <pointLight position={[-2, -1.4, 2]} intensity={0.7} color={member.theme.accent} />
@@ -94,14 +93,12 @@ function AstroMotif({
     <group>
       <mesh>
         <sphereGeometry args={[0.55, 48, 48]} />
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           color={member.theme.primary}
           emissive={member.theme.accent}
-          emissiveIntensity={0.55}
-          roughness={0.18}
-          metalness={0.3}
-          transmission={0.45}
-          thickness={0.4}
+          emissiveIntensity={0.85}
+          roughness={0.22}
+          metalness={0.35}
         />
       </mesh>
       <group ref={rings}>
@@ -123,14 +120,12 @@ function PrismMotif({ member }: { member: FleetMember }) {
     <group>
       <mesh rotation={[0.4, 0.6, 0.1]}>
         <octahedronGeometry args={[0.95, 0]} />
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           color={member.theme.primary}
           emissive={member.theme.secondary}
-          emissiveIntensity={0.35}
-          roughness={0.12}
-          metalness={0.15}
-          transmission={0.55}
-          thickness={0.8}
+          emissiveIntensity={0.55}
+          roughness={0.18}
+          metalness={0.25}
         />
       </mesh>
       {[ -1.1, 0, 1.1 ].map((x) => (
@@ -258,15 +253,13 @@ function BubblesMotif({ member }: { member: FleetMember }) {
       {bubbles.map(([x, y, z, r], i) => (
         <mesh key={i} position={[x, y, z]}>
           <sphereGeometry args={[r, 24, 24]} />
-          <meshPhysicalMaterial
+          <meshStandardMaterial
             color={member.theme.secondary}
-            roughness={0.2}
-            transmission={0.35}
-            thickness={0.4}
+            roughness={0.25}
             transparent
-            opacity={0.85}
+            opacity={0.9}
             emissive={member.theme.accent}
-            emissiveIntensity={0.2}
+            emissiveIntensity={0.35}
           />
         </mesh>
       ))}
@@ -327,15 +320,14 @@ function LabMotif({
     <group>
       <mesh rotation={[0, 0, 0.15]}>
         <cylinderGeometry args={[0.42, 0.55, 1.3, 24, 1, true]} />
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           color={member.theme.primary}
-          transmission={0.5}
-          roughness={0.15}
-          thickness={0.3}
+          roughness={0.2}
+          metalness={0.2}
           transparent
-          opacity={0.8}
+          opacity={0.88}
           emissive={member.theme.secondary}
-          emissiveIntensity={0.2}
+          emissiveIntensity={0.4}
           side={THREE.DoubleSide}
         />
       </mesh>

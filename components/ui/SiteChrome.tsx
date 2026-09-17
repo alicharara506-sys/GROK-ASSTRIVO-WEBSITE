@@ -8,7 +8,7 @@ const NAV = [
 
 export function SiteHeader() {
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-40">
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-40 bg-linear-to-b from-black/55 via-black/20 to-transparent">
       <Link
         href="/#fleet"
         className="pointer-events-auto sr-only focus:not-sr-only focus:absolute focus:left-5 focus:top-3 focus:z-50 focus:rounded-full focus:bg-magenta focus:px-4 focus:py-2 focus:text-xs focus:font-semibold focus:tracking-[0.18em] focus:text-white focus:uppercase"

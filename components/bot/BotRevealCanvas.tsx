@@ -43,7 +43,9 @@ export function BotRevealCanvas({ member }: { member: FleetMember }) {
           rotationIntensity={reducedMotion ? 0 : 0.35}
           floatIntensity={reducedMotion ? 0 : 0.45}
         >
-          <BotMotif member={member} reducedMotion={reducedMotion} />
+          <group position={[1.2, 0.12, 0]} scale={0.95}>
+            <BotMotif member={member} reducedMotion={reducedMotion} />
+          </group>
         </Float>
       </Canvas>
     </div>
@@ -146,20 +148,20 @@ function BrandoMotif({ member }: { member: FleetMember }) {
   return (
     <group>
       <mesh rotation={[0.4, 0.6, 0.2]}>
-        <icosahedronGeometry args={[0.95, 0]} />
+        <icosahedronGeometry args={[0.88, 0]} />
         <meshPhysicalMaterial
-          color={member.theme.primary}
+          color={member.theme.secondary}
           roughness={0.08}
-          metalness={0.15}
-          transmission={0.55}
-          thickness={0.8}
-          emissive={member.theme.secondary}
-          emissiveIntensity={0.45}
+          metalness={0.12}
+          transmission={0.35}
+          thickness={0.9}
+          emissive={member.theme.accent}
+          emissiveIntensity={0.7}
         />
       </mesh>
-      <mesh position={[0.7, 0.55, 0.3]} rotation={[0.2, 0.4, 0]}>
-        <octahedronGeometry args={[0.28, 0]} />
-        <meshBasicMaterial color={member.theme.accent} transparent opacity={0.85} />
+      <mesh position={[0.85, 0.62, 0.35]} rotation={[0.2, 0.4, 0]}>
+        <octahedronGeometry args={[0.32, 0]} />
+        <meshBasicMaterial color={member.theme.accent} transparent opacity={0.92} />
       </mesh>
     </group>
   );
@@ -401,17 +403,21 @@ function QuantoMotif({
   });
   return (
     <group>
-      <mesh ref={ring} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.85, 0.08, 16, 64, Math.PI * 1.55]} />
+      <mesh>
+        <torusGeometry args={[0.92, 0.045, 16, 80]} />
+        <meshBasicMaterial color="#334155" transparent opacity={0.55} />
+      </mesh>
+      <mesh ref={ring}>
+        <torusGeometry args={[0.92, 0.055, 16, 80, Math.PI * 1.55]} />
         <meshStandardMaterial
           color={member.theme.secondary}
           emissive={member.theme.secondary}
-          emissiveIntensity={0.8}
+          emissiveIntensity={0.9}
         />
       </mesh>
       <mesh>
-        <circleGeometry args={[0.55, 40]} />
-        <meshBasicMaterial color={member.theme.primary} />
+        <circleGeometry args={[0.62, 48]} />
+        <meshBasicMaterial color="#0f0f10" />
       </mesh>
     </group>
   );

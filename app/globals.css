@@ -101,8 +101,8 @@ body {
 
 .bot-shell[data-bot="brando"] .bot-motif-wash {
   background:
-    conic-gradient(from 210deg at 70% 20%, rgba(199, 125, 255, 0.22), transparent 40%, rgba(255, 107, 203, 0.16)),
-    linear-gradient(180deg, transparent 40%, #2a0a3c 100%);
+    conic-gradient(from 210deg at 78% 28%, rgba(199, 125, 255, 0.14), transparent 42%, rgba(255, 107, 203, 0.1)),
+    linear-gradient(180deg, transparent 58%, #2a0a3c 100%);
 }
 
 .bot-shell[data-bot="marko"] .bot-motif-wash {

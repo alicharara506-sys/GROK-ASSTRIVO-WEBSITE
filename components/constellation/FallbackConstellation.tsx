@@ -18,7 +18,7 @@ export function FallbackConstellation() {
   const core = FLEET[0];
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
+    <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center pt-16 sm:pt-10">
       <div className="relative aspect-square w-[min(92vw,38rem)]">
         <div
           aria-hidden="true"
@@ -50,10 +50,14 @@ export function FallbackConstellation() {
               }}
             >
               <span
-                className="font-display text-[0.6rem] tracking-[0.12em] text-white"
+                className="block h-2.5 w-2.5 rounded-full"
+                style={{ background: member.theme.secondary, boxShadow: `0 0 12px ${member.theme.secondary}` }}
+              />
+              <span
+                className="absolute top-[calc(100%+0.3rem)] whitespace-nowrap font-display text-[0.55rem] tracking-[0.14em] text-white/80"
                 style={{ color: member.theme.accent }}
               >
-                {member.name.slice(0, 3)}
+                {member.name}
               </span>
             </Link>
           );

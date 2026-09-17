@@ -9,10 +9,17 @@ import { hasWebGL } from "@/lib/webgl";
 
 const subscribe = () => () => {};
 
-function FallbackLayer() {
+function HybridLayer() {
   const wrap = useConstellationFade();
+  const webgl = useSyncExternalStore(subscribe, hasWebGL, () => false);
+
   return (
     <div ref={wrap} className="fixed inset-0 z-0">
+      {webgl ? (
+        <CanvasGuard fallback={null}>
+          <ConstellationCanvas nested />
+        </CanvasGuard>
+      ) : null}
       <FallbackConstellation />
     </div>
   );
@@ -20,19 +27,10 @@ function FallbackLayer() {
 
 export function ConstellationLoader() {
   const mounted = useSyncExternalStore(subscribe, () => true, () => false);
-  const webgl = useSyncExternalStore(subscribe, hasWebGL, () => false);
 
   if (!mounted) {
     return <div className="fixed inset-0 z-0 bg-void" aria-hidden="true" />;
   }
 
-  if (!webgl) {
-    return <FallbackLayer />;
-  }
-
-  return (
-    <CanvasGuard fallback={<FallbackLayer />}>
-      <ConstellationCanvas />
-    </CanvasGuard>
-  );
+  return <HybridLayer />;
 }

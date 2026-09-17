@@ -18,7 +18,7 @@ export function FallbackConstellation() {
   const core = FLEET[0];
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center pt-16 sm:pt-10">
+    <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center pt-16 sm:pt-10 [transform:translateZ(1px)]">
       <div className="relative aspect-square w-[min(92vw,38rem)]">
         <div
           aria-hidden="true"

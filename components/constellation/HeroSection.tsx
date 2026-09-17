@@ -3,28 +3,28 @@
 import { COLORS } from "@/lib/constants";
 import { FLEET } from "@/lib/fleet";
 import { useFleetUi } from "@/components/ui/FleetUiProvider";
+import { FallbackConstellation } from "@/components/constellation/FallbackConstellation";
 
 export function HeroSection() {
   const { hoveredId } = useFleetUi();
   const hovered = FLEET.find((member) => member.slug === hoveredId);
 
   return (
-    <section id="hero" className="pointer-events-none relative z-10 min-h-[100svh]">
+    <section id="hero" className="relative z-10 min-h-[100svh]">
+      <FallbackConstellation />
       <div
-        className="pointer-events-auto absolute inset-x-0 bottom-0 z-0 h-[16vh]"
-        aria-hidden="true"
-      />
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-between px-5 pb-8 pt-24 sm:px-8">
-        <div>
+        className="pointer-events-none relative z-20 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-between px-5 pb-8 pt-24 sm:px-8"
+      >
+        <div className="pointer-events-none max-w-xl">
           <p className="text-[0.7rem] uppercase tracking-[0.42em] text-violet">
             Agency constellation
           </p>
           <h1 className="font-display mt-3 text-5xl font-semibold tracking-[0.18em] text-white sm:text-7xl">
             ASTRIVO
           </h1>
-          <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted sm:text-base">
-            One spine. Ten specialists. Drag to orbit, hover a node, click to
-            open that specialist — not a conversation.
+          <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
+            One spine. Ten specialists. Hover a node, click to open that
+            specialist — not a conversation.
           </p>
           <p className="mt-5 min-h-[2.75rem] text-sm text-fog/80">
             {hovered ? (
@@ -49,7 +49,7 @@ export function HeroSection() {
           <span>Meet the Fleet</span>
           <span
             aria-hidden="true"
-            className="block h-8 w-px bg-linear-to-b from-magenta to-transparent"
+            className="block h-8 w-px"
             style={{ background: `linear-gradient(${COLORS.magenta}, transparent)` }}
           />
         </a>

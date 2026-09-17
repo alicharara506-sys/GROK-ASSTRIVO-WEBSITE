@@ -3,13 +3,13 @@
 import { useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ConstellationScene } from "@/components/constellation/ConstellationScene";
-import { useAgentUi } from "@/components/ui/AgentUiProvider";
+import { useFleetHover } from "@/components/ui/FleetHoverProvider";
 import { CONSTELLATION_AMBIENT_OPACITY, COLORS } from "@/lib/constants";
 import { constellationScroll } from "@/lib/scroll-state";
 
 export default function ConstellationCanvas() {
   const wrap = useRef<HTMLDivElement>(null);
-  const { hover } = useAgentUi();
+  const { hover } = useFleetHover();
 
   useEffect(() => {
     const el = wrap.current;

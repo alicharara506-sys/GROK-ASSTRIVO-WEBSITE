@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Syne } from "next/font/google";
+import {
+  Fraunces,
+  Geist,
+  JetBrains_Mono,
+  Outfit,
+  Space_Grotesk,
+} from "next/font/google";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
+import { SiteFooter, SiteHeader } from "@/components/ui/SiteChrome";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -8,14 +15,33 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const syne = Syne({
-  variable: "--font-syne",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  axes: ["SOFT", "WONK"],
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} Agency — ${SITE_TAGLINE}`,
+  title: {
+    default: `${SITE_NAME} Agency — ${SITE_TAGLINE}`,
+    template: `%s · ${SITE_NAME}`,
+  },
   description: SITE_DESCRIPTION,
 };
 
@@ -27,10 +53,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${syne.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${spaceGrotesk.variable} ${fraunces.variable} ${jetbrains.variable} ${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full overflow-x-hidden bg-space font-sans text-foreground">
+        <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

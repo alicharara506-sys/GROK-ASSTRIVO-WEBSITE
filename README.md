@@ -1,8 +1,14 @@
 # Astrivo Agency
 
-Single-page marketing site for Astrivo: a living 3D constellation hero, a static fleet map, and an outcome-led About section.
+Marketing site for Astrivo: a living 3D constellation, a fleet map, dedicated specialist kits, and an outcome-led About.
 
-Stack: Next.js App Router, TypeScript, React Three Fiber, drei, Tailwind CSS. No backend, API, or database in v1.
+Stack: Next.js App Router, TypeScript, React Three Fiber, drei, Tailwind CSS, Framer Motion. English only. No backend.
+
+## Hard rule: showcase, don’t chat
+
+This site is a visual showcase. There is **no live chat**, no chatbot widget, and no “Talk to [Agent]” / Grok deep-link anywhere in the UI or copy.
+
+Allowed CTAs: **Explore [Bot]**, **View work** (in-page), or **Contact Astrivo** (email placeholder). Agent pages are kits — overview, services, and work — not conversations.
 
 ## Run locally
 
@@ -14,32 +20,38 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Other scripts: `npm run build`, `npm run start`, `npm run lint`.
 
-## Page structure
+## Information architecture
 
-1. **Hero** — interactive constellation (auto-rotate, drag/orbit, hover labels, click-to-panel). Normal page scroll; the camera eases back and the scene fades to a low-opacity ambient layer behind later sections. No scroll-hijack, guided tour, or sound.
-2. **Meet the Fleet** — SEO-friendly radial map. Cards open the same agent panel.
-3. **About** — locked pitch copy and a CTA that opens ASTRO.
+| Route | What you get |
+|---|---|
+| `/` | Immersive constellation hero → Meet the Fleet → About |
+| `/#fleet` | Interactive fleet map (radial on desktop, stacked on mobile) |
+| `/#about` | Story, vision, mission, storytelling craft |
+| `/fleet/[slug]` | Dedicated kit for one of 11 specialists: Overview / Services / Work |
 
-## Swap Grok URLs
+Slugs: `astro`, `brando`, `marko`, `devo`, `dato`, `aivo`, `como`, `pomo`, `fino`, `rovo`, `quanto`.
 
-All “Talk to [Agent]” buttons use `grokDeepLink` on each record in [`lib/agents.ts`](lib/agents.ts).
+Constellation click and fleet cards navigate to `/fleet/[slug]`. Back links return to the constellation with the same home scene.
 
-- Fastest path: change `GROK_PLACEHOLDER_ORIGIN` in [`lib/constants.ts`](lib/constants.ts) and/or `grokDeepLinkFor()` in `lib/agents.ts`.
-- Per-agent path: set `grokDeepLink` on an individual agent object.
+## Hero
 
-v1 ships placeholder `https://grok.com/?…` links.
+Auto-rotate and drag/orbit (touch). Hover shows name, role, and personality accent. Click opens that bot’s page — never a chat panel. Scroll eases the camera back; the constellation stays as a low-opacity ambient layer. No scroll-jacking, no sound, no guided tour. Reduced-motion and a static radial fallback if WebGL fails.
 
 ## Architecture
 
 ```
-app/layout.tsx          fonts, metadata, English `lang`
-app/page.tsx            page composition
-app/globals.css         cosmic theme tokens
-components/constellation/  R3F canvas, scene, nodes, hero overlay
-components/fleet/       static radial map
-components/about/       locked About copy
-components/ui/          agent panel, header, footer, shared chrome
-lib/agents.ts           id, name, role, icon, grokDeepLink, 3D positions
-lib/constants.ts        site copy tokens and Grok origin
-public/icons/           one SVG per agent
+app/layout.tsx                 fonts, metadata, English `lang`, chrome
+app/page.tsx                   home: constellation + fleet + about
+app/fleet/[slug]/page.tsx      11 static specialist kits
+app/globals.css                agency tokens + per-bot motif washes
+components/constellation/      R3F canvas, scene, nodes, particles
+components/fleet/              Meet the Fleet map
+components/about/              locked About copy (BRANDO)
+components/bot/                themed reveal canvas + kit page
+components/ui/                 header, footer, hover state
+lib/fleet.ts                   FleetMember type, BRANDO visual kits, copy
+lib/constants.ts               site + About tokens (no chat origin)
+public/icons/                  one SVG per specialist
 ```
+
+Visual kits (color, mood, motif, services, scenarios) live in [`lib/fleet.ts`](lib/fleet.ts). Contact email placeholder: `hello@astrivo.agency`.

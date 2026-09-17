@@ -13,8 +13,9 @@ export function HeroSection() {
           <h1 className="font-display mt-3 text-5xl font-semibold tracking-[0.18em] text-white sm:text-7xl">
             ASTRIVO
           </h1>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-muted sm:text-base">
-            Drag to orbit. Hover a node. Click to talk.
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted sm:text-base">
+            One spine. Ten specialists. A living fleet. Drag to orbit, hover a
+            node, click to explore.
           </p>
         </div>
         <a
